@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>有你的当代，最好的时代</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="邀您踏上共庆当代置业成立20周年的旅程" />
+    <meta name="viewport" Content-Type="application/x-www-form-urlencoded"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--    <embed src="media/gearup.m4a" hidden="true" autostart="true" loop="true">-->
+    <link rel="shortcut icon" href="http://thumbup.modernland.hk/2020/20thAnniversary.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <style>
+        @-webkit-keyframes reverseRotataZ {
+            0% {
+                -webkit-transform: rotateZ(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotateZ(360deg);
+            }
+        }
+
+        @-webkit-keyframes rotataZ {
+            0% {
+                -webkit-transform: rotateZ(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotateZ(360deg);
+            }
+        }
+
+        #musicControl {
+            display: none;
+            position: fixed;
+            right: 10px;
+            top: 20px;
+            margin-top: 0;
+            display: inline-block;
+            z-index: 99999999
+        }
+
+        #musicControl a {
+            /* display: inline-block; */
+            display: none;
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            background: url('./image/music.png') no-repeat;
+            background-size: 100%;
+        }
+
+        #musicControl a audio {
+            width: 100%;
+            height: 56px;
+        }
+
+        .stop {
+            background-position: left bottom;
+        }
+
+        .on {
+            -webkit-animation: reverseRotataZ 3s linear infinite;
+        }
+
+        #music_play_filter {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999998;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mainBox">
+        <!--        <span id="musicBox">-->
+        <!--            <audio id="music" autoplay="autoplay" preload="auto" controls="controls">-->
+        <!--                <source src="http://thumbup.modernland.hk/2020/media/bgm.mp3" type="audio/mpeg">-->
+        <!--                您的浏览器不支持 audio 元素。-->
+        <!--            </audio>-->
+        <!--        </span>-->
+
+        <!--        测试-->
+
+        <span id="musicControl">
+            <!-- <a id="mc_play" class="stop" onclick="play_music();"> -->
+            <a id="mc_play" class="stop">
+                <audio id="music" loop="loop" preload="auto" src="https://mtd.modernland.hk/media/bgm.mp3"></audio>
+                <!-- <audio id="music" loop="loop" preload="auto" src="http://m701.music.126.net/20191230205017/1949f276b538bd0c7acbb19ef2e72842/jdyyaac/035e/035b/540c/44fdbfe10f416f46438ecf2a3d4c1405.m4a"></audio> -->
+                    <!-- <source src="http://thumbup.modernland.hk/2020/media/bgm.mp3" type="audio/mpeg"> -->
+                    <!-- <source src="./media/bgm.mp3" type="audio/mpeg"> -->
+                <!-- </audio> -->
+            <!-- </a> -->
+        </span>
+        <div class='forsee'>
+            <div class='step step1'>
+                <p class='up animated'><img class='img1' src="image/fir-1.png"></p>
+                <p class='midline animated zoomIn'></p>
+                <p class='down animated hide'><img class='img2' src="image/fir-2.png"></p>
+            </div>
+            <div class='step step2'>
+                <p class='up animated hide'><img class='img1' src="image/sec-1.png"></p>
+                <p class='midline animated hide'></p>
+                <p class='down animated hide'><img class="img2" src="image/sec-2.png"></p>
+            </div>
+            <div class='step step3'>
+                <p class='up animated ' id='entrydate'></p>
+                <p class='midline animated hide'></p>
+                <p class="down0 animated hide" id='name'>{{passname}}</p>
+                <p class='down1 animated hide'><img class="img2" src="image/m1.png"></p>
+                <!-- <p class='down2 animated hide'><img class="img2" src="image/m2.png"></p> -->
+                <p class='down3 animated hide'><img class="img2" src="image/m3.png"></p>
+                <p class='down4 animated hide'><img class="img2" src="image/m4.png"></p>
+                <p class='down5 animated hide'><img class="img2" src="image/m5.png"></p>
+                <p class='down6 animated hide'><img class="img2" src="image/m6.png"></p>
+                <p class='down7 animated hide'><img class="img2" src="image/m7.png"></p>
+            </div>
+        </div>
+        <div class="content index">
+            <!--
+            <div class="day">
+                <strong id="expries" class="animated"><span style="font-size: 20px;">计算中...</span></strong>
+            </div>
+            <div  class="text animated" >
+                <p>亲爱的<span id="name"></span><span class="sex sex1">先生</span><span class="sex sex2">女士</span></p>
+                <p>今天是你加入当代置业的第<span id="stay"></span>天</p>
+            </div>
+            -->
+            <img class='companybless animated fadeIn' src='image/blessrect.png'>
+            <img class='blessinfos1 animated hide' src='image/e1.png'>
+            <img class='blessinfos2 animated hide' src='image/e2.png'>
+            <img class='blessinfos3 animated hide' src='image/e3.png'>
+            <!-- <button id='btn' onclick="getStart()" class="btn">点击开始</button> -->
+            <button id='btn' onclick="getStart()" class="btn"></button>
+        </div>
+        <div class="details">
+            <!--<button class="move"></button>-->
+            <img v-for="item in pics" :src="item" alt="">
+            <img class="bless" onclick="getBlessPage()" src="image/info-28.jpg" alt="">
+        </div>
+        <div class="content blessinfo">
+            <div id="scrollBless">
+                <ul id="scrollBox">
+                    <li><img src="" alt="">20载坚守初心，风雨不变，祝当代置业在绿色科技的征途中不断迭代更新，共筑绿色城市之光。</li>
+                    <li v-for="(item,index) in danmulist"><img
+                            :src="'http://118.144.133.90/momo/images/head/' + item.employee + '.jpg'"
+                            alt="">{{ item.cont }}</li>
+                </ul>
+            </div>
+            <div class="blessbox">
+                <textarea name="" id="blessSentence" placeholder="请输入您的祝福" @focus="moveup" onblur='blessdones()'></textarea>
+                <button class="confirm" @click="addDanmu">确定</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(function () {
+            $('.step1 .up').addClass('slideInUp')
+        }, 0)
+        setTimeout(function () {
+            $('.step1 .down').removeClass('hide').addClass('slideInUp')
+        }, 1500)
+        setTimeout(function () {
+            $('.step1 .up').removeClass('slideInUp').addClass('fadeOut')
+            $('.step1 .midline').addClass('zoomOut')
+            $('.step1 .down').removeClass('slideInUp').addClass('fadeOut')
+        }, 3000)
+
+        setTimeout(function () {
+            $('.step2').fadeIn(0)
+        }, 4000)
+
+        setTimeout(function () {
+            $('.step2 .up').removeClass('hide').addClass('slideInUp')
+        }, 4000)
+        setTimeout(function () {
+            $('.step2 .midline').removeClass('hide').addClass('zoomIn')
+        }, 4000)
+        setTimeout(function () {
+            $('.step2 .down').removeClass('hide').addClass('slideInUp')
+        }, 5500)
+        setTimeout(function () {
+            $('.step2 .up').removeClass('slideInUp').addClass('fadeOut')
+            $('.step2 .midline').removeClass('zoomIn').addClass('zoomOut')
+            $('.step2 .down').removeClass('slideInUp').addClass('fadeOut')
+        }, 6500)
+
+        setTimeout(function () {
+            $('.step3').fadeIn(0)
+        }, 7500)
+
+        setTimeout(function () {
+            $('.step3 .up').removeClass('hide').addClass('flip')
+            $('.step3 .midline').removeClass('hide').addClass('zBeatoomIn')
+        }, 7000)
+        setTimeout(function () {
+            $('.step3 .down0').removeClass('hide').addClass('slideInUp')
+        }, 8500)
+        setTimeout(function () {
+            $('.step3 .down1').removeClass('hide').addClass('slideInUp')
+        }, 9000)
+        // setTimeout(function () {
+        //     $('.step3 .down2').removeClass('hide').addClass('slideInUp')
+        // }, 10500)
+        setTimeout(function () {
+            $('.step3 .down3').removeClass('hide').addClass('slideInUp')
+        }, 10500) //11500
+        setTimeout(function () {
+            $('.step3 .down4').removeClass('hide').addClass('slideInUp')
+        }, 11500) //13000
+        setTimeout(function () {
+            $('.step3 .down5').removeClass('hide').addClass('slideInUp')
+        }, 13000) //14500
+        setTimeout(function () {
+            $('.step3 .down6').removeClass('hide').addClass('slideInUp')
+        }, 14500) //16000
+        setTimeout(function () {
+            $('.step3 .down7').removeClass('hide').addClass('slideInUp')
+        }, 16000) //17500
+
+        setTimeout(function () {
+            $('.forsee').fadeOut(0)
+        }, 18000) //21000
+
+        setTimeout(function () {
+            $('.index').fadeIn(0)
+        }, 18000) //21000
+
+        setTimeout(function () {
+            $('.index .blessinfos1').removeClass('hide').addClass('slideInUp')
+        }, 18500) //21500
+        setTimeout(function () {
+            $('.index .blessinfos2').removeClass('hide').addClass('slideInUp')
+        }, 19500) //22500
+        setTimeout(function () {
+            $('.index .blessinfos3').removeClass('hide').addClass('slideInUp')
+        }, 20500) //23500
+
+        // setTimeout(function() {
+        //     $('.index .blessinfos4').removeClass('hide').addClass('slideInUp')
+        // }, 24500)
+
+        document.querySelector('body').addEventListener('touchstart', function (ev) { event.preventDefault(); });
+
+        // ./media/bgm.mp3
+        //微信里面加载音乐
+        // var wx= (function(){
+        //     return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1
+        // }
+        // )();
+        // if(wx){
+        //     alert("是微信");
+        // }else {
+        //     alert("不是微信");
+        // }
+
+        if(window.navigator.userAgent.indexOf('MissonWebKit') > -1) {
+            // 魔信
+            // alert(1111)
+        } else {
+            // alert(0000)
+        }
+
+        // function isWeiXin() {
+        // var ua = window.navigator.userAgent.toLowerCase();
+        // if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        //         // return true; // 是微信端
+        //         alert(1111)
+        //     } else {
+        //         // return false;
+        //         alert(0000)
+        //     }
+        // }
+        // isWeiXin()
+
+        // if (browser.versions.mobile) {//判断是否是移动设备打开。browser代码在下面
+        //     var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+        //     if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        //         //在微信中打开
+        //         alert('在微信中打开')
+        //     }
+        //     if (ua.match(/WeiBo/i) == "weibo") {
+        //         //在新浪微博客户端打开
+        //         alert('新浪微博客户端打开')
+        //     }
+        //     if (ua.match(/QQ/i) == "qq") {
+        //         //在QQ空间打开
+        //         alert('在QQ空间打开')
+        //     }
+        //     if (browser.versions.ios) {
+        //         //是否在IOS浏览器打开
+        //         alert('是否在IOS浏览器打开')
+        //     }
+        //     if(browser.versions.android){
+        //         //是否在安卓浏览器打开
+        //         alert('是否在安卓浏览器打开')
+        //     }
+        // } else {
+        //     //否则就是PC浏览器打开
+        //     alert('否则就是PC浏览器打开')
+        // }
+
+        // ios兼容处理 -- 没用
+        //function audioAutoPlay(id){
+        //    var audio = document.getElementById(id),
+        //        play = function () {
+        //            audio.play();
+        //            document.removeEventListener("touchstart", play, false);
+        //        };
+        //    audio.play();
+        //    document.addEventListener("WeixinJSBridgeReady", function () {
+        //        play();
+        //    }, false);
+        //    document.addEventListener('YixinJSBridgeReady', function () {
+        //        play();
+        //    }, false);
+        //    document.addEventListener("touchstart", play, false);
+        //}
+        //audioAutoPlay('music');
+
+        function blessdones() {
+            window.scrollTo(0,0)
+        }
+
+        function play_music(event) {
+            if ($('#mc_play').hasClass('on')) {
+                $('#mc_play audio').get(0).pause();
+                $('#mc_play').attr('class', 'stop');
+            } else {
+                $('#mc_play audio').get(0).play();
+                $('#mc_play').attr('class', 'on');
+            }
+            event.stopPropagation(); //阻止冒泡
+        }
+
+        // $(document).on('touchstart',function(){ 
+        //     var audio = $('#music')[0];
+        //     audio.load();
+        //     audio.pause();
+        //     audio.play();
+        // })
+
+
+        function MusicPlay() {
+            var audio = document.getElementById('music');
+            var ico = $('#mc_play');
+            if (audio.paused) {
+                audio.play();
+                ico.removeClass('stop').addClass('on');
+            } else {
+                audio.pause();
+                ico.removeClass('on').addClass('stop');
+            }
+        }
+
+        // $(document).on('touchstart', function (event) {
+        //     var playBtn = $('#mc_play');
+        //     var music = document.getElementById('music');
+        //     var target = $(event.target);
+        //     if (target.is(playBtn)) {
+        //         MusicPlay();
+        //     } else {
+        //         music.play();
+        //     }
+        // });
+            
+        $(document).on('touchstart', function (event) {
+            var audio = document.getElementById('music');
+            // audio.load();
+            audio.play();
+        });
+
+        function autoPlayAudio1() {
+        wx.config({
+                // 配置信息, 即使不正确也能使用 wx.ready
+                debug: false,
+                appId: '',
+                timestamp: 1,
+                nonceStr: '',
+                signature: '',
+                jsApiList: []
+            });
+            wx.ready(function() {
+                document.getElementById('music').play();
+            });
+        }
+
+        autoPlayAudio1()
+
+
+        $("input").unbind("blur").bind("blur", loseFocus);
+        $("textarea").unbind("blur").bind("blur", loseFocus);
+        function loseFocus() {
+            var ua = navigator.userAgent.toLowerCase();
+            var u = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+            if (ua.match(/MicroMessenger/i) == 'micromessenger' && !!u) {
+                var currentPosition, timer;
+                var speed = 0;//页面滚动距离
+                timer = setInterval(function () {
+                    currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+                    currentPosition -= speed;
+                    window.scrollTo(0, currentPosition);//页面向上滚动
+                    currentPosition += speed; //speed变量
+                    window.scrollTo(0, currentPosition);//页面向下滚动
+                    clearInterval(timer);
+                }, 1);
+            }
+        }
+
+
+        //点击开始显示大事记
+        function getStart() {
+            $('.details').fadeIn(0).addClass('animated slideInUp');
+            $('.index').fadeOut(0);
+        }
+        //点击祝福当代：
+        function getBlessPage() {
+            $('.details').fadeOut(0);
+            $('.blessinfo').fadeIn(0).addClass('animated zoomIn');
+        }
+        //获取用户数据：
+        getInfo();
+        // alert('当前路径：'+window.location.href);
+        // alert('flag');
+        async function getInfo() {
+            var passtoken = '';
+            var arr = [];
+            var passjobnumber = '';
+            var timestamp = Date.parse(new Date());
+            var url = window.location.href;
+            var bef = url.split('?')[1].split('&');
+            var hasUid = 1;//默认有UID
+            bef.forEach(val => {
+                var key = val.split('=')[0];
+                var value = val.split('=')[1];
+                var obj = {};
+                obj[key] = value;
+                arr.push(obj);
+            })
+            var obj1 = {};
+            Object.assign(obj1, arr[0], arr[1]);
+            if (obj1.token == '$mam_token' || obj1.token == undefined) {
+                passtoken = '';
+            } else {
+                passtoken = obj1.token;
+            }
+            if (obj1.uid == undefined || obj1.uid == '' || obj1.uid == null) {
+                hasUid = 0;
+            }
+            // alert(passtoken);
+            // alert(obj1.uid);
+            await axios({
+                method: 'get',// 设置请求方式
+                url: 'https://authdata.modernland.hk/org/oprganization/getPersonByJobNumber/success_jsoncallback?OutParam=0&jobNumber=' + obj1.uid,// 设置请求地址
+                // data: {// 参数
+                //     token: obj1.token
+                // },
+                headers: {// 设置请求头
+                    // token: obj1.token
+                    token: passtoken
+                },
+                // responseType: 'blob'// 设置相应数据的类型，设置后后台返回的数据会被强制转为blob类型；如果后台返回代表失败的data，前端也无法得知，依然会下载得到名为undefined的文件。
+            }).then(res => {
+                console.log(res);
+                var val = JSON.parse(res.data.data);
+                var name = val[0].name;
+                var enterday = val[0].entryDate;
+                var jobnumber = val[0].jobNumber
+                var gender = val[0].gender
+                console.log(val[0].name);
+                console.log(val[0].jobNumber);
+                console.log(val[0].entryDate);
+                console.log(val[0].entrydate);
+                $('#name').text(name);
+                $('.text').fadeIn(0).addClass('animated slideInUp')
+                var nTime = timestamp - val[0].entryDate;
+                var days = Math.floor(nTime / 86400000);
+                console.log(days);
+                $('#expries').html(days);
+                $('#expries').addClass('fadeIn');
+                $('#stay').text(days);
+                //document.title = '我与当代的'+ days +'天，庆祝当代置业20周年庆典'
+                if (jobnumber && hasUid == 0) {
+                    if (url.indexOf('?') == -1) {
+                        location.replace(url + '?uid=' + jobnumber);
+                        // window.location.herf(url + '?uid=' + jobnumber);
+                    } else {
+                        location.replace(url + '&uid=' + jobnumber);
+                        // window.location.href(url + '&uid=' + jobnumber);
+                    }
+                    // $('#mc_play').append(`
+                    //     <audio id="music" loop="loop" preload="auto">
+                    //         <source src="./media/bgm.mp3" type="audio/mpeg">
+                    //     </audio>
+                    // `)
+                }
+                if (gender == '男') {
+                    $('.sex1').css('display', 'inline-block')
+                } else {
+                    $('.sex2').css('display', 'inline-block')
+                }
+            });
+            // 原来首页接口 --start
+            // axios.get('https://authdata.modernland.hk/org/oprganization/getPersonByJobNumber/success_jsoncallback?OutParam=0&jobNumber=',
+            //     // { params: { token: 38921371832 }})
+            //     { params: { token: obj1.token }})
+            //     .then((res) => {
+            //         console.log(res);
+            //         var val = JSON.parse(res.data.data);
+            //         var name = val[0].name;
+            //         var enterday = val[0].entryDate;
+            //         console.log(val[0].name);
+            //         console.log(val[0].jobNumber);
+            //         console.log(val[0].entryDate);
+            //         console.log(val[0].entrydate);
+            //         $('#name').text(name);
+            //         var nTime = timestamp - val[0].entryDate;
+            //         var days = Math.floor(nTime / 86400000);
+            //         console.log(days);
+            //         $('#expries').text(days);
+            //         $('#stay').text(days)
+            // })
+            // 原来首页接口 --end
+        }
+        // $(document).ready(function(){
+        (function ($) {
+            $.fn.extend({
+                Scroll: function (opt, callback) {
+                    //参数初始化
+                    if (!opt) var opt = {};
+                    var _this = this.eq(0).find("ul:first");
+                    var lineH = _this.find("li:first").height(), //获取行高
+                        line = opt.line ? parseInt(opt.line, 10) : parseInt(this.height() / lineH, 10), //每次滚动的行数，默认为一屏，即父容器高度
+                        speed = opt.speed ? parseInt(opt.speed, 10) : 500, //卷动速度，数值越大，速度越慢（毫秒）
+                        timer = opt.timer ? parseInt(opt.timer, 10) : 3000; //滚动的时间间隔（毫秒）
+                    if (line == 0) line = 1;
+                    var upHeight = 0 - line * lineH;
+                    //滚动函数
+                    scrollUp = function () {
+                        _this.animate({
+                            marginTop: upHeight
+                        }, speed, function () {
+                            for (i = 1; i <= line; i++) {
+                                _this.find("li:first").appendTo(_this);
+                            }
+                            _this.css({
+                                marginTop: 0
+                            });
+                        });
+                    }
+                    setInterval("scrollUp()", timer);
+                    //鼠标事件绑定
+                    // _this.hover(function () {
+                    //     clearInterval(timerID);
+                    // }, function () {
+                    //     timerID = setInterval("scrollUp()", timer);
+                    // }).mouseout();
+                }
+            });
+        })(jQuery);
+        window.onload = function () {
+
+            $("#scrollBless").Scroll({
+                line: 1,     //一次向上滚动几行
+                speed: 250,  //向上滚动的速度
+                timer: 1500  //多久滚动一次
+            });
+            $('.btn').click(function () {
+                // $('.details').fadeIn(0).addClass('animated bounce');
+                $('.details').fadeIn(0).addClass('animated slideInUp');
+                $('.index').fadeOut(0)
+                // $('.details').css('display','block');
+                // $('.index').css('display','none')
+            });
+
+            getInfo();
+            $("#musicBox").click(function () {
+                var music = document.getElementById('music');
+                if (music.paused) {
+                    music.play();
+                } else {
+                    music.pause();
+                }
+            });
+            // getBless();
+
+            function getBless() {
+                // axios.get('http://thumbup.modernland.hk/2020/dt.php?t=getDanmu&uuid=c882&len=10',
+                axios.get('http://thumbup.modernland.hk/2020/dt.php',
+                    { params: { t: 'getDanmu', uuid: 'c882' } })
+                    .then(res => {
+                        if (res.status == '200') {
+                            res.data.data.forEach(v => {
+                                $('.blessinfo ul').append(
+                                    `<li>${v.cont}</li>`
+                                );
+                            })
+                        }
+                    })
+            }
+
+            // 开始动画
+            // $('.move').click(function() {
+            //     var $height1 = document.querySelector('.details').clientHeight;
+            //     var $height2 = document.querySelector('.details').scrollHeight;
+            //     var $height3 = document.querySelector('.details').scrollTop;
+            //     var $height = $height1 + $height2;
+            //     $('html, body').animate({
+            //         scrollTop: $height
+            //     }, 100000, 'linear',function() {});
+            // });
+            $('.details img').click(function () {
+                $('html, body').stop()
+            });
+            // $('html, body').scroll(function() {
+            // 滑到底部出现祝福当代
+            // $(window).scroll(function(){
+            //     var scrollTop = $(this).scrollTop();
+            //     var scrollHeight = $(document).height();
+            //     var windowHeight = $(this).height();
+            //     if(scrollTop + windowHeight + 150 >= scrollHeight){
+            //         $('.details .bless').css('display','inline-block')
+            //     } else {
+            //         $('.details .bless').css('display','none')
+            //     }
+            // });
+            $('.bless').click(function () {
+                $('.details').fadeOut(0);
+                $('.blessinfo').fadeIn(0).addClass('animated zoomIn')
+                // $('.details').css('display','none');
+                // $('.blessinfo').css('display', 'block');
+                // getBless()
+            });
+            $('.confirm1').click(function () {
+                var text = $('#blessSentence').val();
+                // $uidcode = $_POST['jobNumber'];//用户工号
+                // $uuid    = $_POST['uuid'];//弹幕ID
+                // $cont    = $_POST['cont'];//弹幕内容
+                // $name    = $_POST['name'];//用户姓名
+                // var data = {
+                //     jobNumber: 'MG12784',
+                //     uuid: 'c882',
+                //     cont: text,
+                //     name: '孙宁'
+                // };
+                let data = new FormData()
+                data.append('jobNumber', 'MG12784')
+                data.append('uuid', 'c882')
+                data.append('cont', text)
+                data.append('name', '123')
+                if (text == '') {
+                    alert('祝福语不能为空')
+                } else {
+                    $('.blessinfo ul').append(
+                        `<li>${text}</li>`
+                    );
+                    $('#blessSentence').val('');
+                    // axios.post('http://thumbup.modernland.hk/2020/dt.php?t=addDanmu',data).then(res => {
+                    //     console.log(res)
+                    // })
+                    axios({
+                        url: 'http://thumbup.modernland.hk/2020/dt.php?t=addDanmu',
+                        method: 'post',
+                        // params: data
+                        data: data,
+                        // timeout: 1000,
+                        // headers: 'object 发送的自定义请求头'
+                    }).then(res => {
+                        console.log(res.data.msg);
+                        var box = document.getElementById("scrollBox");
+                        if (res.data.msg == 'success') {
+                            console.log(res);
+                            getBless();
+                            box.parentNode.removeChild(box);
+                        }
+                    })
+                }
+            });
+        }
+    </script>
+    <script>
+        $(function () {
+            new Vue({
+                el: '#mainBox',
+                data: {
+                    srcs: '',
+                    passStatus: 0,
+                    passname: '',
+                    jobNumber: '',
+                    passbless: '',
+                    danmulist: [
+                        { name: '', cont: '静铸二十载，春风不弃，冬霜不改，不忘初心，成就绿色科技经典！祝当代置业二十周年快乐！', employee: '' },
+                        { name: '', cont: '绿色当道二十载，奋力攀登正辉煌；全绿深蓝进阶时，相辅相携攻伟业。祝当代20周年快乐！', employee: '' },
+                        { name: '', cont: '绿色凝入科技，科技点亮建筑，建筑改变生活。祝当代20周年快乐！', employee: '' },
+                        { name: '', cont: '20载坚守初心，风雨不变，祝当代置业在绿色科技的征途中不断迭代更新，共筑绿色城市之光。',employee: ''},
+                        { name: '', cont: '二十年征程，栉风沐雨；二十载坚持，初心不变，塑造绿色科技权威！祝福当代置业二十周年生日快乐！',employee: ''},
+                        { name: '', cont: '二十载风雨同行，向阳而生，与当代共美好拾光。祝福当代置业二十周年生日快乐！',employee: ''},
+                        { name: '', cont: '二十载坚守，构建绿色生活家园百余座，大美当代，辉煌今朝，祝当代置业二十周年快乐！',employee: ''}
+                    ],
+                    a: ['光辉二十载，风雨兼程，春华秋实，逐梦千', '光辉二十载，风雨兼程，春华秋实，逐梦千', '光辉二十载，风雨兼程，春华秋实，逐梦千', '光辉二十载，风雨兼程，春华秋实，逐梦千'],
+                    danmulists: [
+                    { name: '', cont: '静铸二十载，春风不弃，冬霜不改，不忘初心，成就绿色科技经典！祝当代置业二十周年快乐！', employee: '' },
+                        { name: '', cont: '绿色当道二十载，奋力攀登正辉煌；全绿深蓝进阶时，相辅相携攻伟业。祝当代20周年快乐！', employee: '' },
+                        { name: '', cont: '绿色凝入科技，科技点亮建筑，建筑改变生活。祝当代20周年快乐！', employee: '' }
+                        // { name: '', cont: '20载坚守初心，风雨不变，祝当代置业在绿色科技的征途中不断迭代更新，共筑绿色城市之光。',employee: ''}
+                        // { name: '', cont: '二十年征程，栉风沐雨；二十载坚持，初心不变，塑造绿色科技权威！祝福当代置业二十周年生日快乐！',employee: ''},
+                        // { name: '', cont: '二十载风雨同行，向阳而生，与当代共美好拾光。祝福当代置业二十周年生日快乐！',employee: ''},
+                        // { name: '', cont: '二十载坚守，构建绿色生活家园百余座，大美当代，辉煌今朝，祝当代置业二十周年快乐！',employee: ''}
+                    ],
+                    pics: [],
+                    pics2: [
+                        'image/info-1.jpg',
+                        'image/info-2.jpg',
+                        'image/info-3.jpg',
+                        'image/info-4.jpg',
+                        'image/info-5.jpg',
+                        'image/info-6.jpg',
+                        'image/info-7.jpg',
+                        'image/info-8.jpg',
+                        'image/info-9.jpg',
+                        'image/info-10.jpg',
+                        'image/info-11.jpg',
+                        'image/info-12.jpg',
+                        'image/info-13.jpg',
+                        'image/info-14.jpg',
+                        'image/info-15.jpg',
+                        'image/info-16.jpg',
+                        'image/info-17.jpg',
+                        'image/info-18.jpg',
+                        'image/info-19.jpg',
+                        'image/info-20.jpg',
+                        'image/info-21.jpg',
+                        'image/info-22.jpg',
+                        'image/info-23.jpg',
+                        'image/info-24.jpg',
+                        'image/info-25.jpg',
+                        'image/info-26.jpg',
+                        'image/info-27.jpg'
+                    ]
+                },
+                methods: {
+                    begin() {
+                        // alert(45)
+                        $('.details').fadeIn(0).addClass('animated slideInUp');
+                        $('.index').fadeOut(0)
+                    },
+                    getPassInfo() {
+                        var passtoken = ''
+                        var arr = [];
+                        var passjobnumber = '';
+                        var timestamp = Date.parse(new Date());
+                        var url = window.location.href;
+                        var bef = url.split('?')[1].split('&');
+                        bef.forEach(val => {
+                            var key = val.split('=')[0];
+                            var value = val.split('=')[1];
+                            var obj = {};
+                            obj[key] = value;
+                            arr.push(obj)
+                        });
+                        var obj1 = {}
+                        Object.assign(obj1, arr[0], arr[1]);
+                        if (obj1.token == '$mam_token') {
+                            passtoken = ''
+                        } else {
+                            passtoken = obj1.token
+                        }
+                        // var param_uid = '';
+                        // if(obj1.uid && obj1.uid != undefined)
+                        // {
+                        //     param_uid = '&jobNumber='+obj1.uid;
+                        // }
+                        axios({
+                            method: 'get',// 设置请求方式
+                            url: 'https://authdata.modernland.hk/org/oprganization/getPersonByJobNumber/success_jsoncallback?OutParam=0&jobNumber=' + obj1.uid,// 设置请求地址
+                            // data: {// 参数
+                            //     token: obj1.token
+                            // },
+                            headers: {// 设置请求头
+                                // token: obj1.token
+                                token: passtoken
+                            },
+                            // responseType: 'blob'// 设置相应数据的类型，设置后后台返回的数据会被强制转为blob类型；如果后台返回代表失败的data，前端也无法得知，依然会下载得到名为undefined的文件。
+                        }).then(res => {
+                            var info = JSON.parse(res.data.data);
+                            this.passname = info[0].name;
+                            this.jobNumber = info[0].jobNumber;
+                            console.log(info[0])
+                            var entrydate = info[0].entrydate
+                            var arrdate = entrydate.split('-')
+                            var showdate = arrdate[0] + '年' + arrdate[1] + '月' + arrdate[2] + '日'
+                            $('#entrydate').text(showdate)
+                            var arr = []
+                            for (var j = 0; j < showdate.length; j++) {
+                                arr.push(showdate[j])
+                            }
+                            console.log(arr)
+                            // if (showdate) {
+                            //     var i = 0;
+                            //     setTimeout(function() {
+                            //         var asd = setInterval(function () {
+                            //         $('#entrydate').append(`
+                            //             <span class="animated heartBeat">${arr[i]}</span>
+                            //         `)
+                            //         i++;
+                            //         if (i >= arr.length) {
+                            //             clearInterval(asd)
+                            //         }
+                            //     }, 300)
+                            //     }, 6000)
+                                
+                            // }
+                        })
+                    },
+                    moveup() {
+                        var $height1 = document.querySelector('.blessinfo').clientHeight;
+                        var $height2 = document.querySelector('.blessinfo').scrollHeight;
+                        var $height = $height1 + $height2;
+                        $('html, body').animate({
+                            scrollTop: $height
+                        }, 100);
+                    },
+                    blessdone() {
+                        // var t = document.body.clientHeight;
+                        // window.scroll({top:t,left:0,behavior:'smooth' });
+                        // var pane = document.getElementById('pane');
+                        document.body.scrollTop = document.body.offsetHeight;
+                        // alert(document.body.offsetHeight)
+                        // var height = document.documentElement.clientHeight + document.documentElement.scrollHeight
+                        // setTimeout(function(){
+                        //     document.body.scrollTop = document.body.scrollHeight;
+                        //     alert('scrolltop:' + document.body.scrollTop)
+                        //     alert('scrollheight:'+document.body.scrollHeight)
+                        // },100);
+                    },
+                    getBless() {
+                        axios.get('http://thumbup.modernland.hk/2020/dt.php',
+                            { params: { t: 'getDanmu', uuid: 'c882' } })
+                            .then(res => {
+                                console.log(JSON.parse(JSON.stringify(res.data)));
+                                if (res.status == '200') {
+                                    res.data.data.forEach(v => {
+                                        if (v.cont != this.passbless) {
+                                            this.danmulist.push(v)
+                                        }
+                                    })
+                                }
+                            })
+                    },
+                    addDanmu() {
+                        var text = $('#blessSentence').val();
+                        let data = new FormData();
+                        // data.append('jobNumber', 'MG12784'); // 孙宁
+                        data.append('jobNumber', this.jobNumber);
+                        data.append('uuid', 'c882');
+                        data.append('cont', text);
+                        data.append('name', this.passname);
+                        data.append('status', this.passStatus);
+                        if (text == '') {
+                            alert('祝福语不能为空')
+                        } else {
+                            this.passbless = text
+                            $('#blessSentence').val('');
+                            axios({
+                                url: 'http://thumbup.modernland.hk/2020/dt.php?t=addDanmu',
+                                method: 'post',
+                                // params: data
+                                data: data,
+                                // timeout: 1000,
+                                // headers: 'object 发送的自定义请求头'
+                            }).then(res => {
+                                if (res.data.msg == 'success') {
+                                    var obj = {
+                                        cont: text,
+                                        employee: '',
+                                        name: this.passname
+                                    };
+                                    console.log(res);
+                                    this.danmulist = JSON.parse(JSON.stringify(this.danmulists))
+                                    this.danmulist.push(obj);
+                                    this.getBless()
+                                    // setTimeout(() => {
+                                    //     this.getBless()
+                                    // },2000)
+                                }
+                            })
+                        }
+                    }
+                },
+                mounted: function () {
+                    if(window.navigator.userAgent.indexOf('MissonWebKit') > -1) {
+                        // 魔信
+                        this.passStatus = 1 // 魔信
+                    } else {
+                        this.passStatus = 0 // 非魔信
+                    }
+                    this.getPassInfo()
+                    this.getBless()
+                    // setTimeout(() => {
+                    //     this.pics = JSON.parse(JSON.stringify(this.pics2))
+                    // },200)
+                    this.pics2.forEach(v => {
+                        setTimeout(() => {
+                            this.pics.push(v)
+                        }, 1300)
+                    })
+                }
+            })
+        })
+    </script>
+    <script>
+        // (function() {
+        //     function log(info) {
+        //         console.log(info);
+        //         // alert(info);
+        //     }
+        //     function forceSafariPlayAudio() {
+        //         audioEl.load(); // iOS 9   还需要额外的 load 一下, 否则直接 play 无效
+        //         audioEl.play(); // iOS 7/8 仅需要 play 一下
+        //     }
+
+        //     var audioEl = document.getElementById('music');
+
+        //     // 可以自动播放时正确的事件顺序是
+        //     // loadstart
+        //     // loadedmetadata
+        //     // loadeddata
+        //     // canplay
+        //     // play
+        //     // playing
+        //     //
+        //     // 不能自动播放时触发的事件是
+        //     // iPhone5  iOS 7.0.6 loadstart
+        //     // iPhone6s iOS 9.1   loadstart -> loadedmetadata -> loadeddata -> canplay
+        //     audioEl.addEventListener('loadstart', function() {
+        //         log('loadstart');
+        //     }, false);
+        //     audioEl.addEventListener('loadeddata', function() {
+        //         log('loadeddata');
+        //     }, false);
+        //     audioEl.addEventListener('loadedmetadata', function() {
+        //         log('loadedmetadata');
+        //     }, false);
+        //     audioEl.addEventListener('canplay', function() {
+        //         log('canplay');
+        //     }, false);
+        //     audioEl.addEventListener('play', function() {
+        //         log('play');
+        //         // 当 audio 能够播放后, 移除这个事件
+        //         window.removeEventListener('touchstart', forceSafariPlayAudio, false);
+        //     }, false);
+        //     audioEl.addEventListener('playing', function() {
+        //         log('playing');
+        //     }, false);
+        //     audioEl.addEventListener('pause', function() {
+        //         log('pause');
+        //     }, false);
+
+        //     // 由于 iOS Safari 限制不允许 audio autoplay, 必须用户主动交互(例如 click)后才能播放 audio,
+        //     // 因此我们通过一个用户交互事件来主动 play 一下 audio.
+        //     window.addEventListener('touchstart', for

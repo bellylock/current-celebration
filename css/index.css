@@ -1,0 +1,465 @@
+/*公用*/
+/*@font-face {
+    font-family: 'SimSun';
+    src: url('../media/simsun.ttf');
+}*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*font-family: 'SimSun';*/
+    font-family: '宋体'
+}
+body {
+    -webkit-text-size-adjust: 100% !important;
+    background: #bf3325;
+}
+a{
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-user-select: none;
+    -moz-user-focus: none;
+    -moz-user-select: none;
+}
+a:active{
+    outline: none;
+}
+a:focus{
+    outline: none;
+}
+button{
+    outline: none;
+    border: none;
+}
+button:focus{
+    outline: none;
+}
+textarea:focus{
+    outline: none;
+}
+
+/*首页*/
+audio{
+    display: none;
+}
+#musicBox{
+    display: block;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    background: url("../image/music.png") no-repeat center;
+    background-size: 100%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    animation: roll 5s infinite;
+    -webkit-animation: roll 5s infinite;
+    /*animation-direction:alternate;*/
+    animation-timing-function:linear;
+    -webkit-animation-timing-function:linear;
+}
+@keyframes roll {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    0% {
+        transform: rotate(0deg);
+    }
+}
+@-webkit-keyframes roll {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    0% {
+        transform: rotate(0deg);
+    }
+}
+#music{
+    /*display: inline-block;*/
+    /*position: fixed;*/
+    /*width: 0;*/
+    /*height: 0;*/
+    /*z-index: -9;*/
+}
+.hide{
+	display:none;
+}
+.forsee{
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    background: url("../image/bg1.png") no-repeat center;
+    background-size: 100% 100%;
+}
+.forsee .step{
+    width: 80%;
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    margin-left: -39%;
+    /*margin-left: -148px;*/
+}
+.forsee .step2{
+    display:none;
+}
+.forsee .step3{
+    display:none;
+    width: 80%;
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    margin-left: -40%;
+    /*margin-left: -144px;*/
+}
+.forsee .step3 .up{
+    /*height: 82px;*/
+    /*margin-bottom: 40px;*/
+    /*background:url(../image/rect.png) no-repeat center;*/
+    /*background-size:100%; */
+    text-shadow: 3px 2px 5px #333;
+    /* letter-spacing: -4px; */
+    font-size:26px;
+    font-weight: bold;
+    color:#f5e5ae;
+    line-height: 24px;
+    text-align: center;
+}
+.forsee .step3 .up span{
+    display: inline-block;
+    margin: 0;
+}
+.forsee .step3 .down{
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    /*font-size:17px;
+    color:#f5e5ae;
+    line-height: 34px;
+    text-align: center;*/
+}
+.forsee .step3 .midline{
+    width: 64% !important;
+	margin: 16px auto 20px auto !important;
+}
+.forsee .step3 #name{
+    font-size: 26px;
+    font-weight: bold;
+    color: #f5e5ae;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 18px;
+}
+.forsee .step p{
+    font-size: 22px;
+    color: #f5e5ae;
+    /* line-height: 34px; */
+    text-align:center;
+}
+.forsee .step p img{
+    max-width: 100%;
+    display: inline-block;
+    height: 26px;
+}
+.forsee .step3 p img{
+    height: 20px;
+    margin-bottom: 10px;
+}
+/*.forsee .step p .img1{
+    width: 62%;
+}
+.forsee .step p .img2{
+    width: 86%;
+}*/
+.forsee .step .midline{
+    display:block;
+    width: 100%;
+    height: 1px;
+    background: #f5e5ae;
+    margin: 20px auto 24px auto;
+}
+/* 首页 */
+.content{
+    display:none;
+    width: 100%;
+    height: 100vh;
+    background: url("../image/1.png") no-repeat center;
+    background-size: 100% 100%;
+}
+.content .companybless{
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 16%;
+}
+.content .day{
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    width: 270px;
+    height: 270px;
+    margin-left: -136px;
+    background: url("../image/2.png") no-repeat center;
+    background-size: 100%;
+    padding-top: 100px;
+}
+.content .day strong{
+    font-family: '微软雅黑';
+    display: block;
+    text-align: center;
+    font-size: 38px;
+    /*color: white;*/
+    /*background: linear-gradient(45deg, #f8dba0, #eec57a, #f5e1b2);*/
+    background-image: linear-gradient(135deg, #f7d698, #efab31, #f5e2b3);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.content .text{
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    margin-left: -116px;
+    display: none;
+}
+.content .text .sex{
+    display: none;
+}
+.content .text p{
+    font-size: 16px;
+    color: #f9e6ae;
+    line-height: 24px;
+    text-align: center;
+}
+.content #name{
+    color: #f9a919;
+    font-weight: bold;
+    margin: 0 4px;
+    display: inline-block;
+}
+.content .btn{
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    margin-left: -84px;
+    background: url(../image/start.png) no-repeat center;
+    background-size: 100%;
+    font-size: 18px;
+    color: #f9e6ae;
+    line-height: 37px;
+    display: inline-block;
+    width: 170px;
+    height: 38px;
+    text-align: center;
+    text-decoration: none;
+    animation:mymove 1s infinite;
+    animation-direction:alternate;
+    animation-timing-function:linear;
+    -webkit-animation-timing-function:linear;
+    /*animation-direction: reverse;*/
+    /*-webkit-animation:mymove 5s infinite; !*Safari and Chrome*!*/
+
+}
+@keyframes mymove {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+    0% {
+        transform: scale(1);
+    }
+}
+@-webkit-keyframes mymove {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+    0% {
+        transform: scale(1);
+    }
+}
+.content .mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100px;
+    box-shadow: 0 0 15px #ccc;
+    border: 1px solid #ccc;
+}
+.index .blessinfos1{
+	position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-left: -18%;
+    width: 40%;
+
+}
+.index .blessinfos2{
+	position: absolute;
+    top: 36%;
+    left: 50%;
+    margin-left: -18%;
+    width: 40%;
+}
+.index .blessinfos3{
+	position: absolute;
+    top: 42%;
+    left: 50%;
+    margin-left: -26%;
+    width: 56%;
+}
+
+/*滚动浏览*/
+.details{
+    display: none;
+    width: 100%;
+    height: 100vh;
+}
+.details .move{
+    position: fixed;
+    left: 50px;
+    bottom: 50px;
+    width: 30px;
+    height: 90px;
+    display: inline-block;
+    background: url("../image/move.png") no-repeat center;
+    background-size: 100%;
+    border: none;
+}
+.details img{
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    margin-top: -1px;
+}
+.details .bless{
+    /*display: none;*/
+    /*width: 38px;*/
+    /*position: fixed;*/
+    /*left: 50%;*/
+    /*bottom: 3%;*/
+    /*margin-left: -16px;*/
+}
+
+/*祝福语*/
+.blessinfo{
+    display: none;
+    padding-top: 20%;
+    overflow: scroll;
+    /*height: 100%;*/
+}
+.blessinfo #scrollBless{
+    overflow: scroll;
+    height: 200px;
+}
+.blessinfo ul{
+    /*overflow: scroll;*/
+    overflow: hidden;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+.blessinfo ul li{
+    width: 100%;
+    height: 40px;
+    float: left;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #bf3325;
+    font-weight: bold;
+    padding-left: 4px;
+    line-height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-image: url("../image/default.png");
+    background-repeat: no-repeat;
+    background-position: 4px center;
+    background-size: 32px;
+    background-color: #f9e6ae;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    /*background: url("../image/5.png") no-repeat center;*/
+    /*background-size: 100%;*/
+}
+.blessinfo ul li img{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    float: left;
+    margin-top: 2px;
+    margin-right: 6px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+.blessinfo ul li:last-child{
+    margin-bottom: 0;
+}
+.blessinfo .blessbox{
+    width: 320px;
+    height: 410px;
+    background: url(../image/6.png) no-repeat center;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    padding: 194px 40px 80px 32px;
+}
+.blessinfo #blessSentence{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    font-size: 15px;
+    color: #f9e6ae;
+    line-height: 22px;
+    padding: 10px;
+    border: none;
+    resize: none;
+}
+#blessSentence::-webkit-input-placeholder {
+    /* WebKit browsers */
+    font-size:15px;
+    color: #f9e6ae;
+}
+#blessSentence:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #f9e6ae;
+    font-size:15px;
+}
+#blessSentence::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #f9e6ae;
+    font-size:15px;
+}
+#blessSentence::-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #f9e6ae;
+    font-size:15px;
+}
+.blessinfo .blessbox .confirm{
+    display: block;
+    width: 120px;
+    height: 34px;
+    font-size: 16px;
+    color: #df3629;
+    font-weight:bold;
+    line-height: 34px;
+    background-color: #fff5b1;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    /*background: url("../image/7.png") no-repeat center;*/
+    /*background-size: 100%;*/
+    margin: 0 auto;
+}
